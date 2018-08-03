@@ -10,7 +10,7 @@
 #import "SelectedViewController.h"
 #import "fieldTextView.h"
 
-@interface UploadViewController ()<UIGestureRecognizerDelegate, UITextViewDelegate>
+@interface UploadViewController ()<UIGestureRecognizerDelegate, UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end
 
@@ -79,6 +79,25 @@
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(230, 110,  20, 20)];
     [btn setImage:[UIImage imageNamed:@"定位"] forState:UIControlStateNormal];
     [self.view addSubview:btn];
+    
+    
+    UIButton *leftButton = [[UIButton alloc]initWithFrame:CGRectMake(230, 140, 80, 30)];
+    leftButton.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:leftButton];
+    
+    
+    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(310, 140, 30, 30)];
+    [rightButton setImage:[UIImage imageNamed:@"按钮"] forState:UIControlStateNormal];
+    [rightButton setImage:[UIImage imageNamed:@"按钮"] forState:UIControlStateSelected];
+    
+    [self.view addSubview:rightButton];
+//
+//    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(230, 179, 80, 50) style:UITableViewStyleGrouped];
+//    tableView.delegate = self;
+//    tableView.dataSource = self;
+//    tableView.backgroundColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.94f alpha:1.00f];
+//
+//    [self.view addSubview:tableView];
     
     
     
@@ -298,6 +317,41 @@
 - (void)pressLeft {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    return 1;
+//}
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return 4;
+//}
+//
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    return @" ";
+//}
+//- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+//    return @" ";
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return 1;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 1;
+//}
+
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UITableViewCell *cell1 = nil;
+//    cell1 = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+//    NSArray *array = [NSArray arrayWithObjects:@"原创作品", @"设计资料", @"设计师观点",@"设计教程", nil];
+//    if (cell1 == nil) {
+//        cell1.textLabel.text = array[indexPath.row];
+//    }
+//    return cell1;
+//
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

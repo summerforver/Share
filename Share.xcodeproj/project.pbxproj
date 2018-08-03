@@ -123,6 +123,7 @@
 		1BBC498821146978004C7BEC /* MUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC498721146978004C7BEC /* MUViewController.m */; };
 		1BBC498B211479BE004C7BEC /* 上传图片.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BBC498A211479BD004C7BEC /* 上传图片.png */; };
 		1BBC498E21147EBF004C7BEC /* fieldTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC498D21147EBF004C7BEC /* fieldTextView.m */; };
+		1BBC49902114A6BE004C7BEC /* 按钮.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BBC498F2114A6BE004C7BEC /* 按钮.png */; };
 		1BC170FE210E9A16005ACC50 /* SUBmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC170FD210E9A16005ACC50 /* SUBmitViewController.m */; };
 		1BC1717D210F079F005ACC50 /* HOLidayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC1717C210F079F005ACC50 /* HOLidayViewController.m */; };
 		1BC17180210F0B85005ACC50 /* HOLidayFirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC1717F210F0B85005ACC50 /* HOLidayFirstTableViewCell.m */; };
@@ -286,6 +287,7 @@
 		1BBC498A211479BD004C7BEC /* 上传图片.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上传图片.png"; sourceTree = "<group>"; };
 		1BBC498C21147EBF004C7BEC /* fieldTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fieldTextView.h; sourceTree = "<group>"; };
 		1BBC498D21147EBF004C7BEC /* fieldTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fieldTextView.m; sourceTree = "<group>"; };
+		1BBC498F2114A6BE004C7BEC /* 按钮.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "按钮.png"; sourceTree = "<group>"; };
 		1BC170FC210E9A16005ACC50 /* SUBmitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUBmitViewController.h; sourceTree = "<group>"; };
 		1BC170FD210E9A16005ACC50 /* SUBmitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUBmitViewController.m; sourceTree = "<group>"; };
 		1BC1717B210F079F005ACC50 /* HOLidayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HOLidayViewController.h; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 				1BBC490A21143E0F004C7BEC /* 选择图片.png */,
 				1BBC490B21143E0F004C7BEC /* 首页.png */,
 				1BBC498A211479BD004C7BEC /* 上传图片.png */,
+				1BBC498F2114A6BE004C7BEC /* 按钮.png */,
 			);
 			path = "share图片";
 			sourceTree = "<group>";
@@ -858,6 +861,7 @@
 				1BBC491821143E0F004C7BEC /* 4.jpg in Resources */,
 				1BBC491B21143E0F004C7BEC /* 7.jpg in Resources */,
 				1BBC491221143E0F004C7BEC /* 15.jpg in Resources */,
+				1BBC49902114A6BE004C7BEC /* 按钮.png in Resources */,
 				1BBC495421143E0F004C7BEC /* timg-5.jpeg in Resources */,
 				1BBC497521143E0F004C7BEC /* 选择图片.png in Resources */,
 				1BBC491F21143E0F004C7BEC /* button_zan.png in Resources */,
