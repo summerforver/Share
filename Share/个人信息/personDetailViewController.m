@@ -12,6 +12,7 @@
 #import "SETViewController.h"
 #import "MYMessageViewController.h"
 #import "MRViewController.h"
+#import "MUViewController.h"
 
 @interface personDetailViewController ()
 
@@ -41,7 +42,7 @@
 }
 
 - (void)tableViewLoad {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 375, 600)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 375, 620)];
     
 //    self.tableView.backgroundColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.94f alpha:1.00f];
     
@@ -194,20 +195,28 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SETViewController *b = [[SETViewController alloc] init];
+    
     if (indexPath.section == 5) {
+        SETViewController *b = [[SETViewController alloc] init];
         [self.navigationController pushViewController:b animated:YES];
     }
     
-    MRViewController *a = [[MRViewController alloc] init];
+    
     if (indexPath.section == 3) {
+        MRViewController *a = [[MRViewController alloc] init];
         [self.navigationController pushViewController:a animated:YES];
     }
     
-    MYMessageViewController *c = [[MYMessageViewController alloc] init];
+    
     if (indexPath.section == 2) {
+        MYMessageViewController *c = [[MYMessageViewController alloc] init];
         [self.navigationController pushViewController:c animated:YES];
     }
+    if (indexPath.section == 1) {
+        MUViewController *d = [[MUViewController alloc] init];
+        [self.navigationController pushViewController:d animated:YES];
+    }
+    
 }
 
 

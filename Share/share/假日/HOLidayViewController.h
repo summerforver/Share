@@ -10,7 +10,7 @@
 
 @interface HOLidayViewController : ViewController
 
-<UITableViewDataSource, UITableViewDelegate>
+<UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate>
 @property (nonatomic, strong)UITableView *tableView;
 
 @end

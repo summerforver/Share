@@ -11,6 +11,6 @@
 @interface CPTableViewCell : UITableViewCell
 
 @property (nonatomic, strong)UILabel *label;
-@property (nonatomic, strong)UILabel *firstLabel;
-
+//@property (nonatomic, strong)UILabel *firstLabel;
+@property (nonatomic, strong)UITextField *textField;
 @end

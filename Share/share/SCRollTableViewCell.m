@@ -75,7 +75,6 @@
 }
 
 
-//把定时器封装起来 方便调用
 -(void)addTimerTask{
     //6 定时器
     NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(nextImage) userInfo:nil repeats:YES];
@@ -106,7 +105,7 @@
     //  self.scrollView setContentOffset:(CGPoint) animated:(BOOL)
     
     CGFloat offsetX = page * _scrollView.frame.size.width;
-    [UIView animateWithDuration:2.0 animations:^{
+    [UIView animateWithDuration:1.0 animations:^{
         self->_scrollView.contentOffset = CGPointMake(offsetX, 0);
     }];
 }
@@ -130,23 +129,6 @@
     //所以还是调用上面创建的定时器方法
     [self addTimerTask];
 }
-
-//- (NSTimer)
-//- (void)addtimer {
-//    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(repeatPage) userInfo:nil repeats:YES];
-//    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-//}
-
-//- (void)addtimer {
-//    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(repeatPage) userInfo:nil repeats:YES];
-//
-//    NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
-//    [runLoop addTimer:self.timer forMode:NSRunLoopCommonModes];
-//}
-//
-//- (void)repeatPage {
-//    NSLog(@"123");
-//}
 
 
 - (void)awakeFromNib {

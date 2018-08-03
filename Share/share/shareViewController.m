@@ -42,6 +42,7 @@
 //    self.tableView.showsVerticalScrollIndicator = NO;
     
     self.tableView.backgroundColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.94f alpha:1.00f];
+    self.tableView.showsVerticalScrollIndicator = NO;
     
 
     

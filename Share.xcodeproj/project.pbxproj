@@ -120,6 +120,9 @@
 		1BBC497921143E3F004C7BEC /* DBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC497821143E3F004C7BEC /* DBViewController.m */; };
 		1BBC497F21144026004C7BEC /* SelectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC497E21144025004C7BEC /* SelectedViewController.m */; };
 		1BBC498521144431004C7BEC /* SelectedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC498421144431004C7BEC /* SelectedCollectionViewCell.m */; };
+		1BBC498821146978004C7BEC /* MUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC498721146978004C7BEC /* MUViewController.m */; };
+		1BBC498B211479BE004C7BEC /* 上传图片.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BBC498A211479BD004C7BEC /* 上传图片.png */; };
+		1BBC498E21147EBF004C7BEC /* fieldTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBC498D21147EBF004C7BEC /* fieldTextView.m */; };
 		1BC170FE210E9A16005ACC50 /* SUBmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC170FD210E9A16005ACC50 /* SUBmitViewController.m */; };
 		1BC1717D210F079F005ACC50 /* HOLidayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC1717C210F079F005ACC50 /* HOLidayViewController.m */; };
 		1BC17180210F0B85005ACC50 /* HOLidayFirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC1717F210F0B85005ACC50 /* HOLidayFirstTableViewCell.m */; };
@@ -278,6 +281,11 @@
 		1BBC497E21144025004C7BEC /* SelectedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectedViewController.m; sourceTree = "<group>"; };
 		1BBC498321144431004C7BEC /* SelectedCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectedCollectionViewCell.h; sourceTree = "<group>"; };
 		1BBC498421144431004C7BEC /* SelectedCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectedCollectionViewCell.m; sourceTree = "<group>"; };
+		1BBC498621146978004C7BEC /* MUViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUViewController.h; sourceTree = "<group>"; };
+		1BBC498721146978004C7BEC /* MUViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUViewController.m; sourceTree = "<group>"; };
+		1BBC498A211479BD004C7BEC /* 上传图片.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上传图片.png"; sourceTree = "<group>"; };
+		1BBC498C21147EBF004C7BEC /* fieldTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fieldTextView.h; sourceTree = "<group>"; };
+		1BBC498D21147EBF004C7BEC /* fieldTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fieldTextView.m; sourceTree = "<group>"; };
 		1BC170FC210E9A16005ACC50 /* SUBmitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUBmitViewController.h; sourceTree = "<group>"; };
 		1BC170FD210E9A16005ACC50 /* SUBmitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUBmitViewController.m; sourceTree = "<group>"; };
 		1BC1717B210F079F005ACC50 /* HOLidayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HOLidayViewController.h; sourceTree = "<group>"; };
@@ -384,14 +392,16 @@
 			children = (
 				1BD6A850210AC717000C099E /* searchViewController.h */,
 				1BD6A851210AC717000C099E /* searchViewController.m */,
+				1BBC497721143E3F004C7BEC /* DBViewController.h */,
+				1BBC497821143E3F004C7BEC /* DBViewController.m */,
 				1BECE8F921108C1600C676DC /* UploadViewController.h */,
 				1BECE8FA21108C1600C676DC /* UploadViewController.m */,
+				1BBC498C21147EBF004C7BEC /* fieldTextView.h */,
+				1BBC498D21147EBF004C7BEC /* fieldTextView.m */,
 				1BBC497D21144025004C7BEC /* SelectedViewController.h */,
 				1BBC497E21144025004C7BEC /* SelectedViewController.m */,
 				1BBC498321144431004C7BEC /* SelectedCollectionViewCell.h */,
 				1BBC498421144431004C7BEC /* SelectedCollectionViewCell.m */,
-				1BBC497721143E3F004C7BEC /* DBViewController.h */,
-				1BBC497821143E3F004C7BEC /* DBViewController.m */,
 			);
 			path = "搜索";
 			sourceTree = "<group>";
@@ -425,6 +435,7 @@
 				1BB247B5210DE991005786DA /* PERsonTableViewCell.m */,
 				1BB247B7210DE9BB005786DA /* PERsonDetailTableViewCell.h */,
 				1BB247B8210DE9BB005786DA /* PERsonDetailTableViewCell.m */,
+				1BBC49892114697C004C7BEC /* 我上传的 */,
 				1BECE8A5210FF56F00C676DC /* 我推荐的 */,
 				1BC17199210F39F0005ACC50 /* 我的信息 */,
 				1BC17194210F3049005ACC50 /* 设置 */,
@@ -542,8 +553,18 @@
 				1BBC490921143E0F004C7BEC /* 返回.png */,
 				1BBC490A21143E0F004C7BEC /* 选择图片.png */,
 				1BBC490B21143E0F004C7BEC /* 首页.png */,
+				1BBC498A211479BD004C7BEC /* 上传图片.png */,
 			);
 			path = "share图片";
+			sourceTree = "<group>";
+		};
+		1BBC49892114697C004C7BEC /* 我上传的 */ = {
+			isa = PBXGroup;
+			children = (
+				1BBC498621146978004C7BEC /* MUViewController.h */,
+				1BBC498721146978004C7BEC /* MUViewController.m */,
+			);
+			path = "我上传的";
 			sourceTree = "<group>";
 		};
 		1BC17193210F301F005ACC50 /* 假日 */ = {
@@ -759,6 +780,7 @@
 			files = (
 				1BBC497621143E0F004C7BEC /* 首页.png in Resources */,
 				1BBC493721143E0F004C7BEC /* main_img2.png in Resources */,
+				1BBC498B211479BE004C7BEC /* 上传图片.png in Resources */,
 				1BBC491C21143E0F004C7BEC /* 8.jpg in Resources */,
 				1BBC496421143E0F004C7BEC /* 分类.png in Resources */,
 				1BBC491A21143E0F004C7BEC /* 6.jpg in Resources */,
@@ -890,6 +912,7 @@
 				1BC92CFF210AAEC9007586E1 /* ViewController.m in Sources */,
 				1BC17180210F0B85005ACC50 /* HOLidayFirstTableViewCell.m in Sources */,
 				1BD6A852210AC717000C099E /* searchViewController.m in Sources */,
+				1BBC498E21147EBF004C7BEC /* fieldTextView.m in Sources */,
 				1BB247B9210DE9BB005786DA /* PERsonDetailTableViewCell.m in Sources */,
 				1BD6A86F210B0EAA000C099E /* SCRollTableViewCell.m in Sources */,
 				1BC171BA210F64A4005ACC50 /* CPTableViewCell.m in Sources */,
@@ -907,6 +930,7 @@
 				1BECE885210FE93700C676DC /* NCViewController.m in Sources */,
 				1BECE8E521103D4600C676DC /* SHAreThirdTableViewCell.m in Sources */,
 				1BC1719F210F3A46005ACC50 /* MYMessageTableViewCell.m in Sources */,
+				1BBC498821146978004C7BEC /* MUViewController.m in Sources */,
 				1BECE888210FE94C00C676DC /* NCTableViewCell.m in Sources */,
 				1BC1717D210F079F005ACC50 /* HOLidayViewController.m in Sources */,
 				1BECE8A1210FF55200C676DC /* MRViewController.m in Sources */,

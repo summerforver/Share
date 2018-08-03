@@ -47,6 +47,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.showsVerticalScrollIndicator = NO;
     
     [self.view addSubview:_tableView];
 }

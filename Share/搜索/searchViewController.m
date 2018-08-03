@@ -32,6 +32,7 @@
     _searchBar.layer.cornerRadius = 7;
     _searchBar.layer.borderColor = [UIColor whiteColor].CGColor;
     _searchBar.keyboardType = UIKeyboardTypeDefault;
+    _searchBar.delegate = self;
     
     UIImageView *pictureFirstImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 135, 66, 20)];
     pictureFirstImageView.image = [UIImage imageNamed:@"分类"];
@@ -279,7 +280,7 @@
 // 键盘中，搜索按钮被按下，执行的方法
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
    
-    if( [_searchBar.text isEqualToString:@"大白"]){
+    if( [searchBar.text isEqualToString:@"大白"]){
         DBViewController *neww = [[DBViewController alloc] init];
         [self.navigationController pushViewController:neww animated:YES];
     }

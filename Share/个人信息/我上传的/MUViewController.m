@@ -1,21 +1,24 @@
 //
-//  articleViewController.m
+//  MUViewController.m
 //  Share
 //
-//  Created by 王一卓 on 2018/7/26.
+//  Created by 王一卓 on 2018/8/3.
 //  Copyright © 2018年 王一卓. All rights reserved.
 //
 
-#import "articleViewController.h"
+#import "MUViewController.h"
 #import "SHAreSecondTableViewCell.h"
 #import "SHAreFirstTableViewCell.h"
 #import "SHAreThirdTableViewCell.h"
 
-@interface articleViewController ()
+
+@interface MUViewController ()
+
 <
 UITableViewDelegate,
 UITableViewDataSource,
-UIScrollViewDelegate
+UIScrollViewDelegate,
+UIGestureRecognizerDelegate
 >
 @property(nonatomic ,strong) UITableView *tableView;
 @property(nonatomic ,strong) UITableView *tableView2;
@@ -23,13 +26,14 @@ UIScrollViewDelegate
 @property(nonatomic,strong) UIScrollView *sv;
 @property (nonatomic,strong)UISegmentedControl *segment;
 
+
 @end
 
-@implementation articleViewController
-
+@implementation MUViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.94f alpha:1.00f];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"文章";
@@ -41,14 +45,14 @@ UIScrollViewDelegate
     leftButton.tintColor = [UIColor colorWithRed:0.99f green:1.00f blue:1.00f alpha:1.00f];
     self.navigationItem.leftBarButtonItem = leftButton;
     
-//    /**
-//     *  点击了导航栏左边的按钮
-//     */
-//    - (void)tagButtonClick
-//    {
-//        RecommendTagsViewController *vc = [[RecommendTagsViewController alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }
+    //    /**
+    //     *  点击了导航栏左边的按钮
+    //     */
+    //    - (void)tagButtonClick
+    //    {
+    //        RecommendTagsViewController *vc = [[RecommendTagsViewController alloc] init];
+    //        [self.navigationController pushViewController:vc animated:YES];
+    //    }
     _tableView = [self loadTableView];
     _tableView2 = [self loadTableView];
     _tableView3 = [self loadTableView];
@@ -62,14 +66,14 @@ UIScrollViewDelegate
     self.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor  whiteColor],NSForegroundColorAttributeName,[UIFont boldSystemFontOfSize:24.0],NSFontAttributeName,nil];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.21f green:0.53f blue:0.81f alpha:1.00f];
     
-    NSArray *array = [NSArray arrayWithObjects:@"精选文章",@"热门推荐",@"全部文章", nil];
+    NSArray *array = [NSArray arrayWithObjects:@"上传时间",@"推荐最多",@"分享最多", nil];
     _segment = [[UISegmentedControl alloc] initWithItems:array];
     _segment.frame = CGRectMake(0, 60, self.view.frame.size.width, 40);
     _segment.backgroundColor = [UIColor colorWithRed:0.36f green:0.36f blue:0.36f alpha:1.00f];
-
-     _segment.tintColor = [UIColor colorWithRed:0.36f green:0.36f blue:0.36f alpha:1.00f];
     
-
+    _segment.tintColor = [UIColor colorWithRed:0.36f green:0.36f blue:0.36f alpha:1.00f];
+    
+    
     NSDictionary* selectedTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:18.0], NSForegroundColorAttributeName: [UIColor grayColor]};
     
     [_segment setTitleTextAttributes:selectedTextAttributes forState:UIControlStateSelected];//设置文字属性
@@ -90,7 +94,7 @@ UIScrollViewDelegate
     _sv.pagingEnabled = YES;
     _sv.bounces = YES;
     _sv.scrollEnabled = YES;
-
+    
     _sv.scrollEnabled = YES;
     _sv.contentOffset = CGPointMake(0, 0);
     _sv.contentSize = CGSizeMake(355*3, [UIScreen mainScreen].bounds.size.height - 170);
@@ -111,9 +115,31 @@ UIScrollViewDelegate
     [self.view addSubview:_sv];
     
     
-    
-    
+    id target = self.navigationController.interactivePopGestureRecognizer.delegate;
+    // 创建全屏滑动手势，调用系统自带滑动手势的target的action方法
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+    // 设置手势代理，拦截手势触发
+    pan.delegate = self;
+    // 给导航控制器的view添加全屏滑动手势
+    [self.view addGestureRecognizer:pan];
+    // 禁止使用系统自带的滑动手势
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
 }
+- (void)handleNavigationTransition:(UIPanGestureRecognizer *)pan {
+    NSLog(@"左滑");
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    // 注意：只有非根控制器才有滑动返回功能，根控制器没有。
+    // 判断导航控制器是否只有一个子控制器，如果只有一个子控制器，肯定是根控制器
+    if (self.childViewControllers.count == 1) {
+        // 表示用户在根控制器界面，就不需要触发滑动手势，
+        return NO;
+    }
+    return YES;
+}
+
 
 - (UITableView *)loadTableView
 {
@@ -285,6 +311,7 @@ UIScrollViewDelegate
             cell1.labelFourth.text = @"17分钟前";
             cell1.pictureImageView.image = [UIImage imageNamed:@"list_img3"];
             cell1.selectionStyle = UITableViewCellSelectionStyleNone;
+            
             return cell1;
         } else if (indexPath.section == 4) {
             SHAreFirstTableViewCell *cell2 = nil;
@@ -295,6 +322,7 @@ UIScrollViewDelegate
             cell2.labelFourth.text = @"16分钟前";
             cell2.pictureImageView.image = [UIImage imageNamed:@"note_img1"];
             cell2.selectionStyle = UITableViewCellSelectionStyleNone;
+            
             return cell2;
         } else if (indexPath.section == 1) {
             SHAreThirdTableViewCell *cell3 = nil;
@@ -334,21 +362,21 @@ UIScrollViewDelegate
     
     switch (Seg.selectedSegmentIndex) {
         case 0:
-//            [_sv setContentOffset:CGPointMake(_sv.bounds.size.width*0, 0)
-//        animated:YES];
+            //            [_sv setContentOffset:CGPointMake(_sv.bounds.size.width*0, 0)
+            //        animated:YES];
             [_sv setContentOffset:CGPointMake(0, 0)
                          animated:YES];
-
+            
             break;
         case 1:
-//            [_sv setContentOffset:CGPointMake(_sv.bounds.size.width*1, 0) animated:YES];
-              [_sv setContentOffset:CGPointMake(355, 0) animated:YES];
+            //            [_sv setContentOffset:CGPointMake(_sv.bounds.size.width*1, 0) animated:YES];
+            [_sv setContentOffset:CGPointMake(355, 0) animated:YES];
             
             break;
         case 2:
-//            [_sv setContentOffset:CGPointMake(_sv.bounds.size.width*2, 0) animated:YES];
-//
-              [_sv setContentOffset:CGPointMake(355*2, 0) animated:YES];
+            //            [_sv setContentOffset:CGPointMake(_sv.bounds.size.width*2, 0) animated:YES];
+            //
+            [_sv setContentOffset:CGPointMake(355*2, 0) animated:YES];
             break;
         default:
             break;
@@ -357,14 +385,14 @@ UIScrollViewDelegate
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
     if(scrollView.contentOffset.x/355 == 2){
-         [self.segment setSelectedSegmentIndex:2];
+        [self.segment setSelectedSegmentIndex:2];
         
     }
     if(scrollView.contentOffset.x/355 == 1){
         [self.segment setSelectedSegmentIndex:1];
     }
     if(scrollView.contentOffset.x/355 == 0) {
-       [self.segment setSelectedSegmentIndex:0];
+        [self.segment setSelectedSegmentIndex:0];
     }
     
     
@@ -374,7 +402,7 @@ UIScrollViewDelegate
 
 
 - (void)pressLeft {
-    NSLog(@"111");
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,8 +8,9 @@
 
 #import "UploadViewController.h"
 #import "SelectedViewController.h"
+#import "fieldTextView.h"
 
-@interface UploadViewController ()
+@interface UploadViewController ()<UIGestureRecognizerDelegate, UITextViewDelegate>
 
 @end
 
@@ -28,11 +29,34 @@
     [self creatButton];
     
     
+    id target = self.navigationController.interactivePopGestureRecognizer.delegate;
+    // 创建全屏滑动手势，调用系统自带滑动手势的target的action方法
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+    // 设置手势代理，拦截手势触发
+    pan.delegate = self;
+    // 给导航控制器的view添加全屏滑动手势
+    [self.view addGestureRecognizer:pan];
+    // 禁止使用系统自带的滑动手势
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+- (void)handleNavigationTransition:(UIPanGestureRecognizer *)pan {
+    NSLog(@"左滑");
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    // 注意：只有非根控制器才有滑动返回功能，根控制器没有。
+    // 判断导航控制器是否只有一个子控制器，如果只有一个子控制器，肯定是根控制器
+    if (self.childViewControllers.count == 1) {
+        // 表示用户在根控制器界面，就不需要触发滑动手势，
+        return NO;
+    }
+    return YES;
 }
 
 - (void)creatButton {
     UIImageView *FirstImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"选择图片"]];
-    FirstImageView.frame = CGRectMake(10, 75, 200, 120);
+    FirstImageView.frame = CGRectMake(10, 80, 200, 110);
     FirstImageView.userInteractionEnabled= YES;
     [self.view addSubview:FirstImageView];
     
@@ -139,15 +163,35 @@
     [eightButton addTarget:nil action:@selector(press:) forControlEvents:UIControlEventTouchDown];
     
     UITextField *titleTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 310, 375, 25)];
+    UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 3, 25)];
     titleTextField.backgroundColor = [UIColor whiteColor];
-    titleTextField.placeholder = @"   作品名称";
+    titleTextField.placeholder = @" 作品名称";
     titleTextField.font = [UIFont systemFontOfSize:14.0];
+    titleTextField.leftView = iv;
+    titleTextField.leftViewMode = UITextFieldViewModeAlways;
     
-    UITextField *contentTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 350, 375, 90)];
-    contentTextField.backgroundColor = [UIColor whiteColor];
-    contentTextField.placeholder = @"   请添加作品说明和/文章内容......";
-    contentTextField.textAlignment = NSTextAlignmentLeft;
-    contentTextField.font = [UIFont systemFontOfSize:14.0];
+    
+    fieldTextView *textView = [[fieldTextView alloc] initWithFrame:CGRectMake(0, 350, 375, 90)];
+    textView.backgroundColor = [UIColor whiteColor];
+    textView.placeholderColor = [UIColor colorWithRed:0.80f green:0.80f blue:0.80f alpha:1.00f];
+    textView.placeholder = @"请添加作品的名称和介绍";
+    textView.font = [UIFont systemFontOfSize:14];
+    textView.delegate = self;
+    //textView.layer.borderWidth =1;
+    textView.layer.borderColor =[UIColor whiteColor].CGColor;
+    //[textView.layer setCornerRadius:10.0f];
+    
+//    // 创建textView
+//    UITextView *textView =[[UITextView alloc]initWithFrame:CGRectMake(0, 350, 375, 90)];
+//    textView.backgroundColor= [UIColor whiteColor];
+//    textView.font = [UIFont systemFontOfSize:14.0]；
+//    textView.text = @"请添加作品的名称和介绍";
+//    textView.textColor = [UIColor colorWithRed:0.85f green:0.85f blue:0.85f alpha:1.00f];
+//    textView.delegate = self;
+    [self.view addSubview:textView];
+    
+    
+    
     
     UIButton *fabuButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 460, 355, 50)];
     fabuButton.backgroundColor = [UIColor colorWithRed:0.22f green:0.52f blue:0.81f alpha:1.00f];
@@ -156,14 +200,16 @@
     [fabuButton setTitle:@"发布" forState:UIControlStateNormal];
     [fabuButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [fabuButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateSelected];
+    [fabuButton addTarget:self action:@selector(pressDown:) forControlEvents:UIControlEventTouchDown];
     
     UIButton *forbidButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 520, 80, 20)];
     [forbidButton setImage:[UIImage imageNamed:@"checkbox_unchecked"] forState:UIControlStateNormal];
     [forbidButton setImage:[UIImage imageNamed:@"checkbox_checked"] forState:UIControlStateSelected];
     [forbidButton setTitle:@" 禁止下载" forState:UIControlStateNormal];
+    forbidButton.tintColor = [UIColor lightGrayColor];
     forbidButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
     [forbidButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [forbidButton addTarget:self action:@selector(press:) forControlEvents:UIControlEventTouchDown];
+    [forbidButton addTarget:self action:@selector(pressButton:) forControlEvents:UIControlEventTouchDown];
     
     [self.view addSubview:forbidButton];
     [self.view addSubview:fabuButton];
@@ -178,7 +224,48 @@
     [self.view addSubview:sevenButton];
     [self.view addSubview:eightButton];
     [self.view addSubview:titleTextField];
-    [self.view addSubview:contentTextField];
+
+}
+
+- (void)textViewDidChange:(fieldTextView *)textView
+
+{
+
+    if([textView.placeholder length] == 0)
+    {
+        return;
+    }
+    if([textView.placeholder length]  == 0)
+    {
+        [textView.placeHolderLabel setAlpha:1];
+    }
+    else
+    {
+        [textView.placeHolderLabel  setAlpha:0];
+    }
+
+    if ([textView.text isEqualToString:@""]) {
+        [textView.placeHolderLabel setAlpha:1];
+    }
+}
+
+//- (void)textViewDidEndEditing:(UITextView *)textView
+//{
+//    if(textView.text.length < 1){
+//        textView.text = @"请添加作品的名称和介绍";
+//        textView.textColor = [UIColor grayColor];
+//    }
+//}
+//- (void)textViewDidBeginEditing:(UITextView *)textView
+//{
+//    if([textView.text isEqualToString:@"请添加作品的名称和介绍"]){
+//        textView.text=@"";
+//        textView.textColor=[UIColor blackColor];
+//    }
+//}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
 - (void) tapClick:(UITapGestureRecognizer *)tap
@@ -187,8 +274,25 @@
     [self.navigationController pushViewController:new animated:YES];
 }
 
-- (void)press:(UIButton *)button {
+- (void)pressButton:(UIButton *)button {
     button.selected = !button.selected;
+}
+
+- (void)pressDown:(UIButton *)button {
+    button.selected = !button.selected;
+}
+
+- (void)press:(UIButton *)button {
+    if (button.selected) {
+        button.backgroundColor = [UIColor whiteColor];
+        button.selected = NO;
+        
+    } else {
+        
+        button.backgroundColor = [UIColor colorWithRed:0.22f green:0.52f blue:0.81f alpha:1.00f];
+        button.selected = YES;
+    }
+    
 }
 
 - (void)pressLeft {

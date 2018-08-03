@@ -10,8 +10,9 @@
 #import "DBViewController.h"
 #import "SHAreFirstTableViewCell.h"
 #import "SelectedViewController.h"
+#import "UploadViewController.h"
 
-@interface DBViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface DBViewController ()<UITableViewDelegate, UITableViewDataSource,UIGestureRecognizerDelegate>
 @property (nonatomic, strong)UITableView *tableView;
 @end
 
@@ -22,16 +23,42 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.94f alpha:1.00f];
     [self navigationLoad];
+    [self creatTableView];
     
     UISearchBar *searchBar = [[UISearchBar alloc] init];
     searchBar.frame = CGRectMake(10, 80, 355, 40);
     searchBar.placeholder = @"搜索 用户名 作品分类 文章";
+    searchBar.text = @"大白";
     searchBar.barStyle = UISearchBarIconSearch;
     searchBar.backgroundColor = [UIColor whiteColor];
     searchBar.barTintColor = [UIColor whiteColor];
     searchBar.layer.masksToBounds = YES;
     searchBar.layer.cornerRadius = 7;
     searchBar.layer.borderColor = [UIColor whiteColor].CGColor;
+    [self.view addSubview:searchBar];
+    id target = self.navigationController.interactivePopGestureRecognizer.delegate;
+    // 创建全屏滑动手势，调用系统自带滑动手势的target的action方法
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:target action:@selector(handleNavigationTransition:)];
+    // 设置手势代理，拦截手势触发
+    pan.delegate = self;
+    // 给导航控制器的view添加全屏滑动手势
+    [self.view addGestureRecognizer:pan];
+    // 禁止使用系统自带的滑动手势
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+- (void)handleNavigationTransition:(UIPanGestureRecognizer *)pan {
+    NSLog(@"左滑");
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    // 注意：只有非根控制器才有滑动返回功能，根控制器没有。
+    // 判断导航控制器是否只有一个子控制器，如果只有一个子控制器，肯定是根控制器
+    if (self.childViewControllers.count == 1) {
+        // 表示用户在根控制器界面，就不需要触发滑动手势，
+        return NO;
+    }
+    return YES;
 }
 
 - (void)navigationLoad {
@@ -56,16 +83,17 @@
 
 - (void)pressRight
 {
-    SelectedViewController *vc = [[SelectedViewController alloc] init];
+    UploadViewController *vc = [[UploadViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void) creatTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 145, 400, 300) style:UITableViewStylePlain];
-    _tableView.backgroundColor = [UIColor whiteColor];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(10, 135, 355, 600) style:UITableViewStylePlain];
+    _tableView.backgroundColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.94f alpha:1.00f];
     
     [_tableView registerClass:[SHAreFirstTableViewCell class] forCellReuseIdentifier:@"cell3"];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    _tableView.showsVerticalScrollIndicator = NO;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
@@ -77,35 +105,13 @@
 }
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 1;
 }
-
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    SHAreFirstTableViewCell *cell3 = nil;
-    cell3 = [_tableView dequeueReusableCellWithIdentifier:@"cell3" forIndexPath:indexPath];
-    
-    NSArray *array1 = [NSArray arrayWithObjects:@"Icon of Baymax",@"每个人都需要一个大白", nil];
-    NSArray *array2 = [NSArray arrayWithObjects:@"share小王",@"share小吕",nil];
-    NSArray *array3 = [NSArray arrayWithObjects:@"平面设计-画册设计",@"平面设计-海报设计", nil];
-    NSArray *array4 = [NSArray arrayWithObjects:@"15分钟前",@"16分钟前",nil];
-    cell3.labelFirst.text = array1[indexPath.row];
-    cell3.labelSecond.text = array2[indexPath.row];
-    cell3.labelThird.text = array3[indexPath.row];
-    cell3.labelFourth.text = array4[indexPath.row];
-    
-    NSArray *array8 = [NSArray arrayWithObjects:@"大白1",@"大白2",nil];
-    cell3.pictureImageView.image = [UIImage imageNamed:array8[indexPath.row]];
-    
-    return cell3;
-}
-
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return @" ";
@@ -116,11 +122,54 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 8;
+    if (section == 0) {
+        return 0.00001;
+    } else {
+        return 10;
+    }
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 8;
+    return 0.000001;
+    
+}
+
+
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        SHAreFirstTableViewCell *cell3 = nil;
+        cell3 = [_tableView dequeueReusableCellWithIdentifier:@"cell3" forIndexPath:indexPath];
+        
+        cell3.labelFirst.text = @"Icon of Baymax";
+        cell3.labelSecond.text = @"share小王";
+        cell3.labelThird.text = @"原创-UI-icon";
+        cell3.labelFourth.text = @"15分钟前";
+        
+        cell3.pictureImageView.image = [UIImage imageNamed:@"大白1"];
+        
+        return cell3;
+    } else {
+        SHAreFirstTableViewCell *cell1 = nil;
+        cell1 = [_tableView dequeueReusableCellWithIdentifier:@"cell3" forIndexPath:indexPath];
+        
+        cell1.labelFirst.text = @"每个人都需要一个大白";
+        cell1.labelSecond.text = @"share小白";
+        cell1.labelThird.text = @"原创作品-摄影";
+        cell1.labelFourth.text = @"1个月前";
+        
+        cell1.pictureImageView.image = [UIImage imageNamed:@"大白2"];
+        
+        return cell1;
+    }
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.tableView endEditing:YES];
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

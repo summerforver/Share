@@ -17,9 +17,12 @@
         self.label.textColor = [UIColor colorWithRed:0.07f green:0.08f blue:0.08f alpha:1.00f];
         [self.contentView addSubview:_label];
         
-        self.firstLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 15, 170, 20)];
-        self.firstLabel.textColor = [UIColor colorWithRed:0.07f green:0.08f blue:0.08f alpha:1.00f];
-        [self.contentView addSubview:_firstLabel];
+        
+        self.textField = [[UITextField alloc] initWithFrame:CGRectMake(140, 15, 170, 20)];
+        self.textField.textColor = [UIColor colorWithRed:0.07f green:0.08f blue:0.08f alpha:1.00f];
+        [self.contentView addSubview:_textField];
+        
+        
     }
     return self;
     
