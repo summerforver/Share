@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
+#import "RootViewController.h"
+#import "SUBmitViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +20,25 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+
+    RootViewController *a = [[RootViewController alloc] init];
+    self.window.rootViewController = a;
+    
+    //根视图跳转
+    [self performSelector:@selector(test) withObject:nil afterDelay:1.0];
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
+    
+}
+
+//将根视图转换完登录界面
+- (void)test {
+    self.window.rootViewController = [[SUBmitViewController alloc] init];
 }
 
 
