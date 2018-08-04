@@ -88,10 +88,11 @@
     
     UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(310, 140, 30, 30)];
     [rightButton setImage:[UIImage imageNamed:@"按钮"] forState:UIControlStateNormal];
-    [rightButton setImage:[UIImage imageNamed:@"按钮"] forState:UIControlStateSelected];
+//    [rightButton setImage:[UIImage imageNamed:@"按钮"] forState:UIControlStateSelected];
+    [rightButton addTarget:self action:@selector(rightButton:) forControlEvents:UIControlEventTouchDown];
     
     [self.view addSubview:rightButton];
-//
+
 //    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(230, 179, 80, 50) style:UITableViewStyleGrouped];
 //    tableView.delegate = self;
 //    tableView.dataSource = self;
@@ -320,38 +321,52 @@
 
 
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return 1;
-//}
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 4;
-//}
-//
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    return @" ";
-//}
-//- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-//    return @" ";
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 1;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    return 1;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 4;
+}
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell1 = nil;
-//    cell1 = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
-//    NSArray *array = [NSArray arrayWithObjects:@"原创作品", @"设计资料", @"设计师观点",@"设计教程", nil];
-//    if (cell1 == nil) {
-//        cell1.textLabel.text = array[indexPath.row];
-//    }
-//    return cell1;
-//
-//}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @" ";
+}
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    return @" ";
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+   UITableViewCell *cell1 = nil;
+    NSArray *array = [NSArray arrayWithObjects:@"原创作品", @"设计资料", @"设计师观点",@"设计教程", nil];
+    if (cell1 == nil) {
+        
+        cell1 = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+        cell1.textLabel.text = array[indexPath.row];
+    }
+    return cell1;
+
+}
+
+- (void)rightButton:(UIButton *)button {
+
+    if (button.selected){
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(230, 179, 80, 50) style:UITableViewStyleGrouped];
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        tableView.backgroundColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.94f alpha:1.00f];
+
+        [self.view addSubview:tableView];
+    }
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -152,6 +152,8 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    UITouch * touch = touches.anyObject;//获取触摸对象
+    NSLog(@"%@",touch);
     [self.tableView endEditing:YES];
     [self.view endEditing:YES];
 }

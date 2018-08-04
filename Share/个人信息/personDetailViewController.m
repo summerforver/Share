@@ -105,6 +105,7 @@
     }
 }
 
+
 //改变TableView的尾标题栏颜色
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UIView *)view forSection:(NSInteger)section {
     view.tintColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.94f alpha:1.00f];
