@@ -165,6 +165,7 @@ UIScrollViewDelegate
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"");
     if(tableView.tag == 1){
         if(indexPath.section == 0){
             SHAreFirstTableViewCell *cell1 = nil;
