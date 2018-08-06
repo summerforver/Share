@@ -99,6 +99,7 @@
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(230, 170, 90, 0) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.showsVerticalScrollIndicator = NO;
     _tableView.backgroundColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.94f alpha:1.00f];
 //    _tableView.hidden = YES;
    

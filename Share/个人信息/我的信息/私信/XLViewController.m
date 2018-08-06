@@ -54,7 +54,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    _tableView.showsVerticalScrollIndicator=NO;
+    _tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_tableView];
     [self.view addSubview:iview];
     [self.view bringSubviewToFront:iview];
@@ -74,8 +74,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisAppear:) name:UIKeyboardWillHideNotification object:nil];
-
     
+   
+
 }
 
 - (void)send {
@@ -90,7 +91,7 @@
     [_rowheightArray addObject:_rowheight];
     // 插入一条新的cell
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_messageArray.count - 1) inSection:0];
-//    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
 //     [self.tableView insertRowsAtIndexPaths:indexPath withRowAnimation:UITableViewRowAnimationBottom];
     // 更新tableView
     [self.tableView reloadData];
@@ -107,11 +108,16 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return _messageArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    if (indexPath.row == 2) {
+         return 110;
+    } else {
+        return 70;
+    }
+   
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -185,6 +191,12 @@
     return cell;
 }
 
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
+
+
 // 先是简单的键盘回收
 - (void)keyboardWillDisAppear:(NSNotification *)notification{
     // 第一个参数是动画持续时间
@@ -201,9 +213,7 @@
     [UIView animateWithDuration:1.0 animations:^{self.view.transform = CGAffineTransformMakeTranslation(0, keyboardY - self.view.frame.size.height );}];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES];
-}
+
 
 - (void)press {
     [self.navigationController popViewControllerAnimated:YES];
