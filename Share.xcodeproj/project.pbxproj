@@ -150,6 +150,8 @@
 		1BD6A86F210B0EAA000C099E /* SCRollTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD6A86E210B0EAA000C099E /* SCRollTableViewCell.m */; };
 		1BD6A875210B1B51000C099E /* SHAreFirstTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD6A874210B1B51000C099E /* SHAreFirstTableViewCell.m */; };
 		1BD6A8A0210B7387000C099E /* SHAreSecondTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BD6A89F210B7387000C099E /* SHAreSecondTableViewCell.m */; };
+		1BEB3D682117F7D70063654E /* 按钮1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BEB3D672117F7D60063654E /* 按钮1.png */; };
+		1BEB3D6B211822610063654E /* XLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEB3D6A211822610063654E /* XLViewController.m */; };
 		1BECE885210FE93700C676DC /* NCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BECE884210FE93700C676DC /* NCViewController.m */; };
 		1BECE888210FE94C00C676DC /* NCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BECE887210FE94C00C676DC /* NCTableViewCell.m */; };
 		1BECE89A210FEEF900C676DC /* MPMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BECE899210FEEF900C676DC /* MPMTableViewCell.m */; };
@@ -338,6 +340,9 @@
 		1BD6A874210B1B51000C099E /* SHAreFirstTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHAreFirstTableViewCell.m; sourceTree = "<group>"; };
 		1BD6A89E210B7387000C099E /* SHAreSecondTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHAreSecondTableViewCell.h; sourceTree = "<group>"; };
 		1BD6A89F210B7387000C099E /* SHAreSecondTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHAreSecondTableViewCell.m; sourceTree = "<group>"; };
+		1BEB3D672117F7D60063654E /* 按钮1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "按钮1.png"; sourceTree = "<group>"; };
+		1BEB3D69211822610063654E /* XLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLViewController.h; sourceTree = "<group>"; };
+		1BEB3D6A211822610063654E /* XLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLViewController.m; sourceTree = "<group>"; };
 		1BECE883210FE93700C676DC /* NCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCViewController.h; sourceTree = "<group>"; };
 		1BECE884210FE93700C676DC /* NCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NCViewController.m; sourceTree = "<group>"; };
 		1BECE886210FE94C00C676DC /* NCTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCTableViewCell.h; sourceTree = "<group>"; };
@@ -557,6 +562,7 @@
 				1BBC490B21143E0F004C7BEC /* 首页.png */,
 				1BBC498A211479BD004C7BEC /* 上传图片.png */,
 				1BBC498F2114A6BE004C7BEC /* 按钮.png */,
+				1BEB3D672117F7D60063654E /* 按钮1.png */,
 			);
 			path = "share图片";
 			sourceTree = "<group>";
@@ -689,6 +695,8 @@
 				1BECE89C210FEF0800C676DC /* MPMViewController.m */,
 				1BECE898210FEEF900C676DC /* MPMTableViewCell.h */,
 				1BECE899210FEEF900C676DC /* MPMTableViewCell.m */,
+				1BEB3D69211822610063654E /* XLViewController.h */,
+				1BEB3D6A211822610063654E /* XLViewController.m */,
 			);
 			path = "私信";
 			sourceTree = "<group>";
@@ -831,6 +839,7 @@
 				1BBC492621143E0F004C7BEC /* guanzhu_normal.png in Resources */,
 				1BBC493C21143E0F004C7BEC /* my_button_normal.png in Resources */,
 				1BBC493521143E0F004C7BEC /* login_logo.png in Resources */,
+				1BEB3D682117F7D70063654E /* 按钮1.png in Resources */,
 				1BBC494B21143E0F004C7BEC /* timg-10.jpeg in Resources */,
 				1BC92D07210AAEE1007586E1 /* LaunchScreen.storyboard in Resources */,
 				1BBC495121143E0F004C7BEC /* timg-2.jpeg in Resources */,
@@ -941,6 +950,7 @@
 				1BC17192210F2F88005ACC50 /* SETViewController.m in Sources */,
 				1BD6A84F210AC707000C099E /* shareViewController.m in Sources */,
 				1B063647210C425C0049060C /* SEArchTableViewCell.m in Sources */,
+				1BEB3D6B211822610063654E /* XLViewController.m in Sources */,
 				1BD6A858210AC76C000C099E /* activityViewController.m in Sources */,
 				1BC92CFC210AAEC9007586E1 /* AppDelegate.m in Sources */,
 				1BC171B3210F4949005ACC50 /* MSTableViewCell.m in Sources */,

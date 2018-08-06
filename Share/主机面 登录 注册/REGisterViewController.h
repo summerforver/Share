@@ -8,6 +8,12 @@
 
 #import "ViewController.h"
 
-@interface REGisterViewController : ViewController
+typedef void (^ReturnTextBlock)(NSString *showText, NSString *passText);//重新定义了一个block类型变量
 
+@interface REGisterViewController : ViewController
+@property (nonatomic,retain)UITextField *personTextField;
+@property (nonatomic,retain)UITextField *passTextField;
+@property (nonatomic,copy) ReturnTextBlock returnTextBlock;//定义的一个Block属性
+
+- (void)returnText:(ReturnTextBlock)block;
 @end

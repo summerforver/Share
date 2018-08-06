@@ -8,6 +8,15 @@
 
 #import "ViewController.h"
 
+
 @interface SUBmitViewController : ViewController
+
+@property (nonatomic,retain)UITextField *personTextField;
+@property (nonatomic,retain)UITextField *passTextField;
+
+//@property NSString *str1;
+//@property NSString *str2;
+
+
 
 @end

@@ -10,4 +10,8 @@
 
 @interface UploadViewController : ViewController
 
+@property (nonatomic, strong)UITableView *tableView;
+@property (nonatomic, strong)UILabel *label;
+@property (nonatomic, strong)UIButton *rightButton;
+@property (nonatomic) BOOL isSticked;
 @end

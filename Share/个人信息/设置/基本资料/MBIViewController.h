@@ -11,4 +11,6 @@
 @interface MBIViewController : ViewController
 <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
+@property (nonatomic, strong)UIButton *button;
+@property (nonatomic, strong)UIButton *button1;
 @end

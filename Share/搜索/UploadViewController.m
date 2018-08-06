@@ -81,17 +81,28 @@
     [self.view addSubview:btn];
     
     
-    UIButton *leftButton = [[UIButton alloc]initWithFrame:CGRectMake(230, 140, 80, 30)];
-    leftButton.backgroundColor = [UIColor lightGrayColor];
-    [self.view addSubview:leftButton];
+    _label = [[UILabel alloc] initWithFrame:CGRectMake(230, 140, 80, 30)];
+    _label.font = [UIFont systemFontOfSize:12.0];
+    _label.textAlignment = NSTextAlignmentCenter;
+    _label.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:_label];
+//    UIButton *leftButton = [[UIButton alloc]initWithFrame:CGRectMake(230, 140, 80, 30)];
+//    leftButton.backgroundColor = [UIColor lightGrayColor];
+//    [self.view addSubview:leftButton];
     
     
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(310, 140, 30, 30)];
-    [rightButton setImage:[UIImage imageNamed:@"按钮"] forState:UIControlStateNormal];
-//    [rightButton setImage:[UIImage imageNamed:@"按钮"] forState:UIControlStateSelected];
-    [rightButton addTarget:self action:@selector(rightButton:) forControlEvents:UIControlEventTouchDown];
+    _rightButton = [[UIButton alloc] initWithFrame:CGRectMake(310, 140, 30, 30)];
+    [_rightButton setImage:[UIImage imageNamed:@"按钮"] forState:UIControlStateNormal];
+//    [_rightButton setImage:[UIImage imageNamed:@"按钮1"] forState:UIControlStateSelected];
+    [_rightButton addTarget:self action:@selector(rightButton:) forControlEvents:UIControlEventTouchDown];
     
-    [self.view addSubview:rightButton];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(230, 170, 90, 0) style:UITableViewStyleGrouped];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.backgroundColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.94f alpha:1.00f];
+//    _tableView.hidden = YES;
+   
+    [self.view addSubview:_rightButton];
 
 //    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(230, 179, 80, 50) style:UITableViewStyleGrouped];
 //    tableView.delegate = self;
@@ -231,6 +242,9 @@
     [forbidButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [forbidButton addTarget:self action:@selector(pressButton:) forControlEvents:UIControlEventTouchDown];
     
+    
+    
+    
     [self.view addSubview:forbidButton];
     [self.view addSubview:fabuButton];
     
@@ -244,6 +258,7 @@
     [self.view addSubview:sevenButton];
     [self.view addSubview:eightButton];
     [self.view addSubview:titleTextField];
+    [self.view addSubview:_tableView];
 
 }
 
@@ -328,6 +343,10 @@
     return 4;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 30;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return @" ";
 }
@@ -343,29 +362,70 @@
     return 1;
 }
 
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    UITableViewCell *cell1 = nil;
+    cell1 = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
     NSArray *array = [NSArray arrayWithObjects:@"原创作品", @"设计资料", @"设计师观点",@"设计教程", nil];
     if (cell1 == nil) {
         
-        cell1 = [tableView dequeueReusableCellWithIdentifier:@"cell1"];
+        cell1 = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell1"];
         cell1.textLabel.text = array[indexPath.row];
+        cell1.textLabel.font = [UIFont systemFontOfSize:10.0];
     }
     return cell1;
 
 }
 
-- (void)rightButton:(UIButton *)button {
-
-    if (button.selected){
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(230, 179, 80, 50) style:UITableViewStyleGrouped];
-        tableView.delegate = self;
-        tableView.dataSource = self;
-        tableView.backgroundColor = [UIColor colorWithRed:0.93f green:0.93f blue:0.94f alpha:1.00f];
-
-        [self.view addSubview:tableView];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        _label.text = @"原创作品";
+    } else if (indexPath.row == 1) {
+        _label.text = @"设计资料";
+    } else if (indexPath.row == 2) {
+        _label.text = @"设计师观点";
+    } else {
+        _label.text = @"设计教程";
     }
+    
+    [ UIView animateWithDuration:0.3
+                      animations:^{
+                          self.rightButton.imageView.transform = CGAffineTransformMakeRotation(2*M_PI);
+                          self.tableView.frame = CGRectMake(230, 170, 90, 0);
+                          self.isSticked = NO;
+                      }];
+   
+}
 
+- (void)rightButton:(UIButton *)button {
+//    button.selected = !button.selected;
+    
+    
+    if (self.isSticked) {
+        
+        [ UIView animateWithDuration:0.3
+                          animations:^{
+                              
+                              button.imageView.transform = CGAffineTransformMakeRotation(M_PI);
+                              self.tableView.frame = CGRectMake(230, 170, 90, 80);
+                                                      }] ;
+        
+        
+
+        
+    } else{
+        //        _tableView.hidden = YES;
+        [ UIView animateWithDuration:0.3
+                          animations:^{
+                              button.imageView.transform = CGAffineTransformMakeRotation(2*M_PI);
+                              self.tableView.frame = CGRectMake(230, 170, 90, 0);
+                              
+                          }];
+
+
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

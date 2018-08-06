@@ -153,23 +153,23 @@
     } else if (indexPath.section == 3) {
         UITableViewCell *fouthCell = [tableView dequeueReusableCellWithIdentifier:@"fouthCell"];
         fouthCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"fouthCell"];
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(110, 15, 15, 20)];
-        [button setImage:[UIImage imageNamed:@"girl_button"] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:@"boy_button"] forState:UIControlStateSelected];
-        [button addTarget:nil action:@selector(press:) forControlEvents:UIControlEventTouchDown];
+        _button = [[UIButton alloc] initWithFrame:CGRectMake(110, 15, 15, 20)];
+        [_button setImage:[UIImage imageNamed:@"girl_button"] forState:UIControlStateNormal];
+        [_button setImage:[UIImage imageNamed:@"boy_button"] forState:UIControlStateSelected];
+        [_button addTarget:self action:@selector(press:) forControlEvents:UIControlEventTouchDown];
         UILabel *label5 = [[UILabel alloc] initWithFrame:CGRectMake(130, 15, 20, 20)];
         label5.text = @"男";
         label5.font = [UIFont systemFontOfSize:16.0];
         
-        UIButton *button1 = [[UIButton alloc] initWithFrame:CGRectMake(180, 15, 15, 20)];
-        [button1 setImage:[UIImage imageNamed:@"girl_button"] forState:UIControlStateNormal];
-        [button1 setImage:[UIImage imageNamed:@"boy_button"] forState:UIControlStateSelected];
-        [button1 addTarget:nil action:@selector(press:) forControlEvents:UIControlEventTouchDown];
+        _button1 = [[UIButton alloc] initWithFrame:CGRectMake(180, 15, 15, 20)];
+        [_button1 setImage:[UIImage imageNamed:@"girl_button"] forState:UIControlStateNormal];
+        [_button1 setImage:[UIImage imageNamed:@"boy_button"] forState:UIControlStateSelected];
+        [_button1 addTarget:self action:@selector(press:) forControlEvents:UIControlEventTouchDown];
         UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(200, 15, 20, 20)];
         label1.text = @"女";
         label1.font = [UIFont systemFontOfSize:16.0];
-        [fouthCell.contentView addSubview:button];
-        [fouthCell.contentView addSubview:button1];
+        [fouthCell.contentView addSubview:_button];
+        [fouthCell.contentView addSubview:_button1];
         [fouthCell.contentView addSubview:label5];
         [fouthCell.contentView addSubview:label1];
         
@@ -201,8 +201,19 @@
     }
 }
 
-- (void)press:(UIButton *)button {
-    button.selected = !button.selected;
+- (void)press:(UIButton *)sender {
+//    button.selected = !button.selected;
+    
+    if (_button == nil){
+        _button = sender;
+    } else if (_button == nil && _button == sender) {
+        sender.selected = YES;
+    } else if (_button != sender && _button1 != nil){
+        _button.selected = NO;
+        sender.selected = YES;
+        _button = sender;
+    }
+    
 }
 
 - (void)pressLeft {

@@ -11,5 +11,7 @@
 @interface CPViewController : ViewController
 <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
+@property NSString *str1;
+@property NSString *str2;
 
 @end

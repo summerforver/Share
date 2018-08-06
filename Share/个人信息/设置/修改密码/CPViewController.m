@@ -34,12 +34,16 @@
     [self.tableView registerClass:[CPTableViewCell class] forCellReuseIdentifier:@"firstCell"];
     
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(150, 260, 70, 30)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(150, 260, 90, 30)];
     [button setTitle:@"提交" forState:UIControlStateNormal];
+   
     button.layer.masksToBounds = YES;
     button.layer.cornerRadius = 5;
     button.backgroundColor = [UIColor blackColor];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [button addTarget:self action:@selector(press:) forControlEvents:UIControlEventTouchDown];
+    
     [self.view addSubview:button];
     
     
@@ -143,17 +147,39 @@
 //
         CPTableViewCell *firstCell = [tableView dequeueReusableCellWithIdentifier:@"firstCell"];
         firstCell.label.text = array[indexPath.row];
+    
+    firstCell.textField.tag = indexPath.row;
+    
         firstCell.textField.placeholder = firstArray[indexPath.row];
-        
+    [firstCell.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+//    if (indexPath.row == 1) {
+//        self.str1 = firstCell.textField.text;
+//    }
+//    if (indexPath.row == 2) {
+//        self.str2 = firstCell.textField.text;
+//    }
+    
         firstCell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return firstCell;
 //    }
 }
 
+- (void)textFieldDidChange:(UITextField *)textField {
+    if (textField.tag == 1) {
+        self.str1 = textField.text;
+    }
+    if (textField.tag == 2) {
+        self.str2 = textField.text;
+    }
+    
+    
+}
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    UITouch * touch = touches.anyObject;//获取触摸对象
-    NSLog(@"%@",touch);
+//    UITouch * touch = touches.anyObject;//获取触摸对象
+//    NSLog(@"%@",touch);
     [self.tableView endEditing:YES];
     [self.view endEditing:YES];
 }
@@ -161,7 +187,48 @@
 - (void)pressLeft {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)press:(UIButton *)sender {
     
+    if (_str1 != nil && _str2 != nil) {
+        if ([_str1 isEqualToString: _str2]) {
+            [sender setTitle:@"提交成功" forState:UIControlStateSelected];
+            
+            //           sender.selected = NO;
+        } else {
+            [sender setTitle:@"提交失败" forState:UIControlStateSelected];
+            
+            //           sender.selected = NO;
+        }
+        
+    } else {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"请输入新密码" message:@" " preferredStyle:UIAlertControllerStyleAlert];
+//        NSMutableAttributedString *titleText = [[NSMutableAttributedString alloc] initWithString:@"请输入新密码"];
+//        [titleText addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(0, 8)];
+//        [titleText addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 8)];
+//        [alert setValue:titleText forKey:@"attributedTitle"];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            //响应事件
+            NSLog(@"action = %@", action);
+        }];
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            //响应事件
+            NSLog(@"action = %@", action);
+        }];
+        
+        [alert addAction:defaultAction];
+        [alert addAction:cancelAction];
+        alert.view.tintColor = [UIColor blackColor];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }
+    
+    sender.selected = !sender.selected;
+   
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

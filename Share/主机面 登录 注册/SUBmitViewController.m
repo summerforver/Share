@@ -18,6 +18,7 @@
 
 @interface SUBmitViewController ()
 
+
 @end
 
 @implementation SUBmitViewController
@@ -36,39 +37,47 @@
     shareLabel.textColor = [UIColor colorWithRed:1.00f green:1.00f blue:1.00f alpha:1.00f];
     
     
-    UITextField *personTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, 270, 300, 50)];
-    personTextField.backgroundColor = [UIColor colorWithRed:1.00f green:1.00f blue:1.00f alpha:1.00f];
-    personTextField.borderStyle = UITextBorderStyleRoundedRect;
-    
-//    personTextField.leftViewMode = UITextFieldViewModeAlways;
-    
-    UIImageView *leftFirstImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
+    UIImageView *leftFirstImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 40)];
     leftFirstImageView.image = [UIImage imageNamed:@"user_img"];
-    [personTextField addSubview:leftFirstImageView];
-    
     
     UIImageView *lineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 6, 40, 40)];
     lineImageView.image = [UIImage imageNamed:@"竖线"];
-    [personTextField addSubview:lineImageView];
+    
+    _personTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, 270, 300, 50)];
+    _personTextField.backgroundColor = [UIColor colorWithRed:1.00f green:1.00f blue:1.00f alpha:1.00f];
+    _personTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _personTextField.leftView = leftFirstImageView;
+//    personTextField.leftView = lineImageView;
+    _personTextField.leftViewMode = UITextFieldViewModeAlways;
+//    _personTextField.text = self.str1;
     
     
-    UITextField *passTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, 330, 300, 50)];
-    passTextField.backgroundColor = [UIColor colorWithRed:1.00f green:1.00f blue:1.00f alpha:1.00f];
-    passTextField.borderStyle = UITextBorderStyleRoundedRect;
+    
+    [_personTextField addSubview:leftFirstImageView];
+    [_personTextField addSubview:lineImageView];
     
 
-    
-    
-    UIImageView *leftSecondImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
+    UIImageView *leftSecondImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 40)];
     leftSecondImageView.image = [UIImage imageNamed:@"pass_img"];
-    [passTextField addSubview:leftSecondImageView];
-    
-//        passTextField.leftView = leftSecondImageView;
-    //    passTextField.leftViewMode = UITextFieldViewModeAlways;
     
     UIImageView *lineSecondImageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 6, 40, 40)];
     lineSecondImageView.image = [UIImage imageNamed:@"竖线"];
-    [passTextField addSubview:lineSecondImageView];
+    
+    
+    _passTextField = [[UITextField alloc] initWithFrame:CGRectMake(40, 330, 300, 50)];
+    _passTextField.backgroundColor = [UIColor colorWithRed:1.00f green:1.00f blue:1.00f alpha:1.00f];
+    _passTextField.borderStyle = UITextBorderStyleRoundedRect;
+    _passTextField.leftView = leftSecondImageView;
+    _passTextField.leftViewMode = UITextFieldViewModeAlways;
+//    _passTextField.text = self.str2;
+    
+    
+    [_passTextField addSubview:leftSecondImageView];
+    
+//        passTextField.leftView = leftSecondImageView;
+    //    passTextField.leftViewMode = UITextFieldViewModeAlways;
+
+    [_passTextField addSubview:lineSecondImageView];
 //        passTextField.leftView = lineSecondImageView;
     //
     
@@ -83,7 +92,7 @@
     submitButton.layer.borderWidth = 0.5;
     submitButton.layer.borderColor = [UIColor whiteColor].CGColor;
     
-    [submitButton addTarget:nil action:@selector(pressSubmit) forControlEvents:UIControlEventTouchDown];
+    [submitButton addTarget:self action:@selector(pressSubmit) forControlEvents:UIControlEventTouchDown];
     
     
     
@@ -98,7 +107,7 @@
     
     loginButton.layer.borderWidth = 0.5;
     loginButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    [loginButton addTarget:nil action:@selector(pressLogin) forControlEvents:UIControlEventTouchDown];
+    [loginButton addTarget:self action:@selector(pressLogin) forControlEvents:UIControlEventTouchDown];
     
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(30, 450, 30, 30)];
@@ -119,12 +128,16 @@
     
     [self.view addSubview:firstImageView];
     [self.view addSubview:shareLabel];
-    [self.view addSubview:personTextField];
-    [self.view addSubview:passTextField];
+    [self.view addSubview:_personTextField];
+    [self.view addSubview:_passTextField];
     [self.view addSubview:submitButton];
     [self.view addSubview:loginButton];
     [self.view addSubview:button];
     [self.view addSubview:submitLabel];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisAppear:) name:UIKeyboardWillHideNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear:) name:UIKeyboardWillShowNotification object:nil];
     
     
 }
@@ -142,13 +155,20 @@
 
 - (void)pressLogin
 {
-    REGisterViewController *a = [[REGisterViewController alloc] init];
-    a.view.transform = CGAffineTransformMakeScale(0.2, 0.2);
-    [UIView animateWithDuration:0.9 animations:^{
-        a.view.transform = CGAffineTransformIdentity;
+    REGisterViewController *vc = [[REGisterViewController alloc] init];
+//    a.view.transform = CGAffineTransformMakeScale(0.2, 0.2);
+//    [UIView animateWithDuration:0.9 animations:^{
+//        a.view.transform = CGAffineTransformIdentity;
+//    }];
+    
+    [vc returnText:^(NSString *showText,NSString *passText) {
+        self.personTextField.text = showText;
+        self.passTextField.text = passText;
     }];
-   
-    self.view.window.rootViewController = a;
+    [self presentViewController:vc animated:YES completion:nil];
+    
+//    self.view.window.rootViewController = a;
+//    [self.navigationController pushViewController:a animated:YES];
     
 }
 
@@ -206,6 +226,20 @@
 //    }];
 //
 //    self.view.window.rootViewController = enter;
+}
+
+- (void)keyboardWillDisAppear:(NSNotification *)notification{
+    // 第一个参数是动画持续时间
+    // 第二个参数是方法，这里让视图恢复原来的位置就好
+    [UIView animateWithDuration:1 animations:^{self.view.transform = CGAffineTransformMakeTranslation(0, 0);}];
+}
+
+- (void)keyboardWillAppear:(NSNotification *)notification{
+    // 计算键盘高度
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardY = keyboardFrame.origin.y;
+    // 视图整体上升，这里的64是状态栏高度
+    [UIView animateWithDuration:1.0 animations:^{self.view.transform = CGAffineTransformMakeTranslation(0, keyboardY - 500);}];
 }
 
 

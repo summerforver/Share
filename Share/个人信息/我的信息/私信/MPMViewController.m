@@ -8,6 +8,7 @@
 
 #import "MPMViewController.h"
 #import "MPMTableViewCell.h"
+#import "XLViewController.h"
 
 @interface MPMViewController ()<UIGestureRecognizerDelegate>
 
@@ -109,6 +110,14 @@
     firstCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return firstCell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 1) {
+        XLViewController *a = [[XLViewController alloc] init];
+          self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:a animated:YES];
+    }
 }
 
 - (void)pressLeft {
